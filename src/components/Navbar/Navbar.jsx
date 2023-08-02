@@ -4,11 +4,18 @@ import "./Navbar.css";
 const Navbar = () => {
   return (
     <div className="navbar">
-      <h1>
-        Weather <span>Forecast</span>
-      </h1>
-
-      <UserButton />
+      <div className="navbar__container">
+        <h1>
+          Weather <span>Forecast</span>
+        </h1>
+        <UserButton
+          appearance={{
+            variables: {
+              fontFamily: "Montserrat",
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };

@@ -3,13 +3,21 @@
   top: 0;
   left: 0;
   display: flex;
-  justify-content: space-between;
   width: 100%;
   align-items: center;
+  justify-content: center;
   height: 80px;
   padding: 0 24px;
+  width: 100%;
 }
-
+.navbar__container {
+  width: 100%;
+  max-width: 1920px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 .navbar h1 {
   font-family: var(--font-mont);
   font-size: 32px;
@@ -21,4 +29,14 @@
 
 .navbar h1 span {
   font-weight: 700;
+}
+
+.cl-internal-phfxlr {
+  font-family: var(--font-mont);
+}
+
+@media screen and (max-width: 1024px) {
+  .navbar h1 {
+    font-size: 24px;
+  }
 }

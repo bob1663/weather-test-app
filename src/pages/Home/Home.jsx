@@ -1,35 +1,72 @@
-import { Navbar, Searchbar, Sidemenu } from "../../components";
+import { useEffect } from "react";
+import {
+  CityCard,
+  DayCard,
+  Navbar,
+  Searchbar,
+  Sidemenu,
+} from "../../components";
 import "./Home.css";
+import axios from "axios";
+
 const Home = () => {
   /* const apiKey = "ECL2N67ZCS9E9FZSTFEBE2BBH";
   const city = "Barcelona";
   const date1 = "2023-08-02"; // Replace this with the current date in the format 'YYYY-MM-DD'
-  const date2 = "2023-08-10";
+  const date2 = "2023-08-17";
 
   const apiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${date1}/${date2}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
 
-  fetch(apiUrl)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
       }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      // Do something with the fetched data here
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    }); */
+    };
+    fetchData();
+  }, []);
+ */
+
+  const cityData = Array.from({ length: 10 }, (_, index) => ({
+    id: index + 1,
+  }));
+
+  const dayData = Array.from({ length: 15 }, (_, index) => ({
+    id: index + 1,
+  }));
+
   return (
     <div className="home">
-      <Navbar />
-      <div className="home__content">
-        <Searchbar />
-      </div>
-      <div className="home__sidemenu">
-        <Sidemenu />
+      <div className="home__container">
+        <Navbar />
+        <div className="home__content">
+          <Searchbar />
+          <div className="home__content-cities_container">
+            <div className="home__content-cities">
+              {cityData.map((city) => (
+                <CityCard key={city.id} />
+              ))}
+            </div>
+            <button>
+              <h1>+</h1>
+              <h1>Add trip</h1>
+            </button>
+          </div>
+          <div className="home__week">
+            <h1>Week</h1>
+            <div className="home__week-days">
+              {dayData.map((day) => (
+                <DayCard key={day.id} />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="home__sidemenu">
+          <Sidemenu />
+        </div>
       </div>
     </div>
   );

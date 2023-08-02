@@ -2,7 +2,7 @@ import './Sidemenu.css'
 
 const Sidemenu = () => {
   return (
-    <div>Sidemenu</div>
+    <div className='sidemenu'>Sidemenu</div>
   )
 }
 

@@ -2,17 +2,132 @@
   height: 100%;
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1920px;
   flex-direction: row;
 }
 
 .home__content {
-  flex: 2;
+  width: 66%;
   background-color: #ffffff;
   height: 100vh;
+  padding: 120px 24px 0 24px;
+}
+
+.home__content-cities_container {
+  display: flex;
+  margin-top: 48px;
+  width: 100%;
+  gap: 24px;
+  flex-direction: row;
+  align-items: start;
+}
+
+.home__content-cities {
+  display: flex;
+  gap: 24px;
+  max-width: 900px;
+  width: 100%;
+  overflow-x: auto;
+
+  padding-bottom: 12px;
+}
+
+.home__content-cities::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 30px;
+  height: 10px;
+}
+
+.home__content-cities::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 30px;
+}
+
+.home__content-cities::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 30px;
+}
+
+.home__content-cities::-webkit-scrollbar-thumb:hover {
+  background: #616161;
+}
+
+.home__content-cities_container button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  background: #f2f4f8;
+  height: 180px;
+  max-width: 280px;
+  width: 100%;
+}
+
+.home__content-cities_container button:hover {
+  filter: brightness(95%);
+}
+
+.home__content-cities_container button h1:first-child {
+  font-size: 48px;
+}
+.home__content-cities_container button h1 {
+  font-family: var(--font-mont);
+  color: #000000;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -1px;
 }
 
 .home__sidemenu {
-  flex: 1;
+  width: 34%;
   background-color: #110e3b;
   height: 100vh;
+}
+
+.home__week {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  gap: 24px;
+}
+
+.home__week h1 {
+  font-family: var(--font-mont);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: normal;
+  color: #000000;
+}
+
+@media screen and (max-width: 1024px) {
+  .home__container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .home__content {
+    width: 100%;
+  }
+  .home__content-cities_container {
+    flex-direction: column-reverse;
+  }
+
+  .home__content-cities {
+    max-width: none;
+  }
+  .home__sidemenu {
+    height: auto;
+    width: 100%;
+  }
 }
