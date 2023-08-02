@@ -1,0 +1,24 @@
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  height: 80px;
+  padding: 0 24px;
+}
+
+.navbar h1 {
+  font-family: var(--font-mont);
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: normal;
+  color: #000000;
+}
+
+.navbar h1 span {
+  font-weight: 700;
+}

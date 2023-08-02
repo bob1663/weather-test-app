@@ -1,0 +1,18 @@
+.home {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.home__content {
+  flex: 2;
+  background-color: #ffffff;
+  height: 100vh;
+}
+
+.home__sidemenu {
+  flex: 1;
+  background-color: #110e3b;
+  height: 100vh;
+}
