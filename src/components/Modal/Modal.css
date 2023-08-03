@@ -1,0 +1,159 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: none;
+  z-index: 30;
+}
+
+.modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(258deg, #0f1011 0%, #26292b 100%);
+}
+
+.modal__form {
+  background: #ffffff;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modal__form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 30px;
+}
+
+.form-border {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.modal__form-header h1 {
+  font-family: var(--font-mont);
+  color: #000000;
+  line-height: normal;
+  font-weight: 600;
+  letter-spacing: -1px;
+  font-size: 20px;
+}
+
+.close-icon {
+  color: #000000;
+  cursor: pointer;
+}
+
+.modal__form-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px;
+  gap: 12px;
+}
+
+.modal__form-content p {
+  font-family: var(--font-mont);
+  color: #000000;
+  line-height: normal;
+  font-weight: 500;
+  letter-spacing: -1px;
+  font-size: 16px;
+  display: flex;
+  gap: 6px;
+}
+
+.modal__form-content p span {
+  color: red;
+}
+
+.modal__form-content select,
+.modal__form-content input {
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+
+  font-family: var(--font-mont);
+  color: rgba(0, 0, 0, 0.3);
+  line-height: normal;
+  font-weight: 500;
+
+  font-size: 16px;
+  padding: 0 12px;
+}
+
+.modal__form-content select option {
+  font-family: var(--font-mont);
+  color: #000000;
+  line-height: normal;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal__form-footer {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal__form-footer button:first-child {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  font-family: var(--font-mont);
+  color: #000000;
+  line-height: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.modal__form-footer button:first-child:hover {
+  background: rgba(129, 129, 129, 0.1);
+}
+
+.modal__form-footer button:last-child {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  width: 100px;
+  background: #1890ff;
+  font-family: var(--font-mont);
+  color: #ffffff;
+  line-height: normal;
+  font-weight: 500;
+  font-size: 16px;
+}
+.modal__form-footer button:last-child:hover {
+  background: #49a7ff;
+}
+
+@media screen and (max-width: 640px) {
+  .modal__form {
+    max-width: none;
+    height: 100%;
+  }
+}

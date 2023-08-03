@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   CityCard,
   DayCard,
+  Modal,
   Navbar,
   Searchbar,
   Sidemenu,
@@ -38,8 +39,11 @@ const Home = () => {
     id: index + 1,
   }));
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div className="home">
+      <Modal setModalOpen={setModalOpen} modalOpen={modalOpen}/>
       <div className="home__container">
         <Navbar />
         <div className="home__content">
@@ -50,7 +54,7 @@ const Home = () => {
                 <CityCard key={city.id} />
               ))}
             </div>
-            <button>
+            <button onClick={() => setModalOpen(true)}>
               <h1>+</h1>
               <h1>Add trip</h1>
             </button>

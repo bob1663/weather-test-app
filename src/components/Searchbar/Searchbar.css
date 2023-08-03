@@ -20,3 +20,9 @@
   font-weight: 500;
   color: #000000;
 }
+
+@media screen and (max-width: 1024px) {
+  .searchbar {
+    max-width: none;
+  }
+}

@@ -151,4 +151,8 @@
     height: auto;
     width: 100%;
   }
+
+  .home__content-cities_container button {
+    max-width: none;
+  }
 }
