@@ -8,9 +8,10 @@ const Modal = ({ setModalOpen, modalOpen, addTrip }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const today = new Date();
-  const minDate = today.toISOString().split("T")[0];
-  const maxDate = new Date(today.setDate(today.getDate() + 15))
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().split("T")[0];
+  const maxDate = new Date(tomorrow.setDate(tomorrow.getDate() + 15))
     .toISOString()
     .split("T")[0];
 

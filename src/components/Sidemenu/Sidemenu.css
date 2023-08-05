@@ -30,7 +30,12 @@
 .sidemenu__weather div {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 18px;
+}
+
+.sidemenu__weather div img {
+  width: 120px;
 }
 
 .sidemenu__weather div h1 {
@@ -113,5 +118,8 @@
 @media screen and (max-width: 1024px) {
   .sidemenu {
     padding: 40px 24px;
+  }
+  .sidemenu__weather div img {
+    width: 100px;
   }
 }
