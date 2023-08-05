@@ -1,18 +1,28 @@
 import "./Sidemenu.css";
 import { WiDayRainWind } from "react-icons/wi";
+import { format, parseISO } from "date-fns";
 
-const Sidemenu = () => {
+const Sidemenu = ({ data }) => {
+  if (!data || !data.days || !data.days[0] || !data.days[0].datetime) {
+    return null;
+  }
+  const datetime = parseISO(data.days[0].datetime);
+  const dayName = format(datetime, "EEEE");
+
+  const temperature = Math.floor(data.days[0].feelslike);
+
   return (
     <div className="sidemenu">
       <div className="sidemenu__weather">
-        <h2>Sunday</h2>
+        <h2>{dayName}</h2>
         <div>
           <WiDayRainWind size={96} color="#ffffff" />
           <h1>
-            24<sup>°C</sup>
+            {temperature}
+            <sup>°C</sup>
           </h1>
         </div>
-        <h3>Berlin</h3>
+        <h3>{data.address}</h3>
       </div>
       <div className="sidemenu__timer">
         <div className="sidemenu__timer-container">

@@ -9,6 +9,7 @@
   user-select: none;
 }
 
+.citycard.active,
 .citycard:hover {
   border: 1px solid rgb(0, 153, 255);
 }
