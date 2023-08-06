@@ -112,12 +112,24 @@ const Home = () => {
                     </div>
                   ) : (
                     filteredTrips.map((trip, index) => (
-                      <CityCard
+                      <div
                         key={index}
-                        data={trip}
-                        selectTrip={() => setSelectedTrip(trip)}
-                        isActive={trip === selectedTrip}
-                      />
+                        ref={(el) => {
+                          if (trip === selectedTrip && el) {
+                            el.scrollIntoView({
+                              behavior: "smooth",
+                              block: "nearest",
+                              inline: "center",
+                            });
+                          }
+                        }}
+                      >
+                        <CityCard
+                          data={trip}
+                          selectTrip={() => setSelectedTrip(trip)}
+                          isActive={trip === selectedTrip}
+                        />
+                      </div>
                     ))
                   )}
                 </div>
@@ -127,7 +139,7 @@ const Home = () => {
                 </button>
               </div>
               <div className="home__week">
-                <h1>Week</h1>
+                <h1>Week ({selectedTrip.city})</h1>
                 <div className="home__week-days">
                   {selectedData &&
                     selectedData.days &&

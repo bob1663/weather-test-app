@@ -89,6 +89,7 @@
   background: #f2f4f8;
   height: 180px;
   max-width: 280px;
+  min-width: 180px;
   width: 100%;
 }
 
