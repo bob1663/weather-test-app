@@ -14,10 +14,12 @@ import { MutatingDots } from "react-loader-spinner";
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [trips, setTrips] = useState([
-    { city: "London", date1: getInitialDate(2), date2: getInitialDate(4) },
-    { city: "Dubai", date1: getInitialDate(5), date2: getInitialDate(10) },
-  ]);
+  const [trips, setTrips] = useState(
+    JSON.parse(sessionStorage.getItem("citycards")) || [
+      { city: "London", date1: getInitialDate(2), date2: getInitialDate(4) },
+      { city: "Dubai", date1: getInitialDate(5), date2: getInitialDate(10) },
+    ]
+  );
 
   const [selectedTrip, setSelectedTrip] = useState(trips[0]);
   const [selectedTodaysWeather, setSelectedTodaysWeather] = useState(trips[0]);
@@ -29,25 +31,38 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const { city, date1, date2 } = selectedTrip;
-      const apiKey = "3RDZJHXLV34C74M32H5B593L8";
-      const weatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${date1}/${date2}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
 
-      const todaysWeatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
+      try {
+        const { city, date1, date2 } = selectedTrip;
+        const apiKey = "3RDZJHXLV34C74M32H5B593L8";
 
-      const response = await axios.get(weatherApiUrl);
-      const todaysWeatherResponse = await axios.get(todaysWeatherApiUrl);
+        const weatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${date1}/${date2}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
+        const todaysWeatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
 
-      setSelectedData(response.data);
-      setSelectedTodaysWeather(todaysWeatherResponse.data);
+        const [response, todaysWeatherResponse] = await Promise.all([
+          axios.get(weatherApiUrl),
+          axios.get(todaysWeatherApiUrl),
+        ]);
 
-      setLoading(false);
+        setSelectedData(response.data);
+        setSelectedTodaysWeather(todaysWeatherResponse.data);
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchData();
   }, [selectedTrip]);
 
   useEffect(() => {
-    setFilteredTrips(trips);
+    const sortedTrips = [...trips].sort((a, b) =>
+      a.date1.localeCompare(b.date1)
+    );
+
+    setFilteredTrips(sortedTrips);
+    sessionStorage.setItem("citycards", JSON.stringify(trips));
   }, [trips]);
 
   useEffect(() => {

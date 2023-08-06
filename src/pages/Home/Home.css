@@ -148,7 +148,7 @@
   }
 
   .home__content-cities_container {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .home__content-cities {

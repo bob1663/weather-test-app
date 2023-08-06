@@ -1,5 +1,4 @@
 import "./Sidemenu.css";
-import { WiDayRainWind } from "react-icons/wi";
 import {
   format,
   parseISO,
