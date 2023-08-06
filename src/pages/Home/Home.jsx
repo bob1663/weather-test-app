@@ -82,7 +82,10 @@ const Home = () => {
       <Modal
         setModalOpen={setModalOpen}
         modalOpen={modalOpen}
-        addTrip={(trip) => setTrips((prev) => [...prev, trip])}
+        addTrip={(trip) => {
+          setTrips((prev) => [...prev, trip]);
+          setSelectedTrip(trip);
+        }}
       />
       <div className="home__container">
         <Navbar />
