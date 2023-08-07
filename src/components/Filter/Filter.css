@@ -1,0 +1,29 @@
+.filter {
+  display: flex;
+  align-items: center;
+  background: #f2f4f8;
+  height: 60px;
+  gap: 8px;
+  padding: 6px 12px;
+}
+
+.filter__sort select {
+  all: unset;
+  font-family: var(--font-mont);
+  font-size: 20px;
+  line-height: normal;
+  font-weight: 500;
+  color: #000000;
+  cursor: pointer;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.filter__sort select option {
+  font-family: var(--font-mont);
+  font-size: 16px;
+  line-height: normal;
+  font-weight: 500;
+  color: #000000;
+}

@@ -72,11 +72,13 @@ const Modal = ({ setModalOpen, modalOpen, addTrip }) => {
             <option value="" disabled>
               Please select a city
             </option>
-            {cities.map((city) => (
-              <option value={city.name} key={city.name}>
-                {city.name}
-              </option>
-            ))}
+            {cities
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((city) => (
+                <option value={city.name} key={city.name}>
+                  {city.name}
+                </option>
+              ))}
           </select>
           <p>
             <span>*</span>Start date

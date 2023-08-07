@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   CityCard,
   DayCard,
+  Filter,
   Modal,
   Navbar,
   Searchbar,
@@ -13,20 +14,20 @@ import { MutatingDots } from "react-loader-spinner";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
-
   const [trips, setTrips] = useState(
     JSON.parse(sessionStorage.getItem("citycards")) || [
       { city: "London", date1: getInitialDate(2), date2: getInitialDate(4) },
       { city: "Dubai", date1: getInitialDate(5), date2: getInitialDate(10) },
     ]
   );
-
   const [selectedTrip, setSelectedTrip] = useState(trips[0]);
   const [selectedTodaysWeather, setSelectedTodaysWeather] = useState(trips[0]);
   const [selectedData, setSelectedData] = useState(null);
   const [filteredTrips, setFilteredTrips] = useState(trips);
-
   const [loading, setLoading] = useState(false);
+  const [sortOrder, setSortOrder] = useState("date");
+  const [isAscending, setIsAscending] = useState(true);
+  const [filterText, setFilterText] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,13 +58,30 @@ const Home = () => {
   }, [selectedTrip]);
 
   useEffect(() => {
-    const sortedTrips = [...trips].sort((a, b) =>
-      a.date1.localeCompare(b.date1)
-    );
+    const sortedAndFilteredTrips = [...trips]
+      .filter((trip) =>
+        trip.city.toLowerCase().includes(filterText.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (sortOrder === "date") {
+          return isAscending
+            ? a.date1.localeCompare(b.date1)
+            : b.date1.localeCompare(a.date1);
+        } else if (sortOrder === "name") {
+          return isAscending
+            ? a.city.localeCompare(b.city)
+            : b.city.localeCompare(a.city);
+        } else if (sortOrder === "length") {
+          const lengthA = new Date(a.date2) - new Date(a.date1);
+          const lengthB = new Date(b.date2) - new Date(b.date1);
+          return isAscending ? lengthA - lengthB : lengthB - lengthA;
+        }
+        return 0;
+      });
 
-    setFilteredTrips(sortedTrips);
+    setFilteredTrips(sortedAndFilteredTrips);
     sessionStorage.setItem("citycards", JSON.stringify(trips));
-  }, [trips]);
+  }, [trips, filterText, sortOrder, isAscending]);
 
   useEffect(() => {
     console.log(selectedData);
@@ -77,15 +95,42 @@ const Home = () => {
     return futureDate.toISOString().split("T")[0];
   }
 
+  const handleAddTrip = (trip) => {
+    setTrips((prevTrips) => [...prevTrips, trip]);
+    setSelectedTrip(trip);
+  };
+
+  const handleDeleteTrip = (city) => {
+    if (trips.length === 1) {
+      return;
+    }
+
+    const updatedTrips = trips.filter((trip) => trip.city !== city);
+    setTrips(updatedTrips);
+
+    if (selectedTrip.city === city) {
+      setSelectedTrip(updatedTrips[0] || null);
+    }
+
+    sessionStorage.setItem("citycards", JSON.stringify(updatedTrips));
+  };
+
+  const scrollToSelectedTrip = (trip, el) => {
+    if (trip === selectedTrip && el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  };
+
   return (
     <div className="home">
       <Modal
         setModalOpen={setModalOpen}
         modalOpen={modalOpen}
-        addTrip={(trip) => {
-          setTrips((prev) => [...prev, trip]);
-          setSelectedTrip(trip);
-        }}
+        addTrip={handleAddTrip}
       />
       <div className="home__container">
         <Navbar />
@@ -106,7 +151,15 @@ const Home = () => {
         ) : (
           <>
             <div className="home__content">
-              <Searchbar trips={trips} setFilteredTrips={setFilteredTrips} />
+              <div className="home__content-filters">
+                <Searchbar trips={trips} setFilteredTrips={setFilteredTrips} />
+                <Filter
+                  sortOrder={sortOrder}
+                  setSortOrder={setSortOrder}
+                  isAscending={isAscending}
+                  setIsAscending={setIsAscending}
+                />
+              </div>
               <div className="home__content-cities_container">
                 <div className="home__content-cities">
                   {filteredTrips.length === 0 ? (
@@ -117,20 +170,14 @@ const Home = () => {
                     filteredTrips.map((trip, index) => (
                       <div
                         key={index}
-                        ref={(el) => {
-                          if (trip === selectedTrip && el) {
-                            el.scrollIntoView({
-                              behavior: "smooth",
-                              block: "nearest",
-                              inline: "center",
-                            });
-                          }
-                        }}
+                        ref={(el) => scrollToSelectedTrip(trip, el)}
                       >
                         <CityCard
                           data={trip}
                           selectTrip={() => setSelectedTrip(trip)}
                           isActive={trip === selectedTrip}
+                          deleteTrip={() => handleDeleteTrip(trip.city)}
+                          shouldShowDeleteIcon={trips.length > 1}
                         />
                       </div>
                     ))

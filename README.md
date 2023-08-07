@@ -10,6 +10,8 @@ Key Features:
 - In the block on the right (top if on phones), a timer is displayed that counts the time until the start of the trip and displays the current weather.
 - Trips are saved in session storage so after reloading the page they won't disappear.
 - You can use the searchbar to find a specific trip by city name.
+- You can sort the list of round-trip trips by different parameters
+- You can remove a specific trip from your list
 
 ### Prerequisites
 

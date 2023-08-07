@@ -8,6 +8,7 @@ import rome from '../assets/Cities/rome.webp';
 import singapore from '../assets/Cities/singapore.webp';
 import sydney from '../assets/Cities/sydney.webp';
 import tokyo from '../assets/Cities/tokyo.webp';
+import kyiv from '../assets/Cities/kyiv.webp';
 
 import clearDay from '../assets/Icons/clear-day.svg';
 import clearNight from '../assets/Icons/clear-night.svg';
@@ -34,6 +35,7 @@ import wind from '../assets/Icons/wind.svg';
 
 export default {
     // Cities
+    kyiv,
     barcelona,
     dubai,
     london,

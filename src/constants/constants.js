@@ -1,6 +1,11 @@
 import images from "./images";
 
 export const cities = [
+
+    {
+        name: "Kyiv",
+        imgUrl: images.kyiv
+    },
     {
         name: "Barcelona",
         imgUrl: images.barcelona

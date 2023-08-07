@@ -12,6 +12,7 @@ const Navbar = () => {
           appearance={{
             variables: {
               fontFamily: "Montserrat",
+              colorBackground: "#ffffff",
             },
           }}
         />

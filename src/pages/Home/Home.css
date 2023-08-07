@@ -30,9 +30,16 @@
   padding: 120px 24px 0 24px;
 }
 
+.home__content-filters {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-direction: row;
+}
+
 .home__content-cities_container {
   display: flex;
-  margin-top: 48px;
+  margin-top: 40px;
   width: 100%;
   gap: 24px;
   flex-direction: row;
@@ -170,5 +177,13 @@
 
   .home__content-cities_container button {
     max-width: none;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .home__content-filters {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
   }
 }
