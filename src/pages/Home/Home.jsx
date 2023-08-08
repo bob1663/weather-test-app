@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   CityCard,
   DayCard,
@@ -11,6 +11,7 @@ import {
 import "./Home.css";
 import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
+import { AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 
 const Home = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -35,7 +36,7 @@ const Home = () => {
 
       try {
         const { city, date1, date2 } = selectedTrip;
-        const apiKey = "3RDZJHXLV34C74M32H5B593L8";
+        const apiKey = "ECL2N67ZCS9E9FZSTFEBE2BBH";
 
         const weatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/${date1}/${date2}?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
         const todaysWeatherApiUrl = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/today?unitGroup=metric&include=days&key=${apiKey}&contentType=json`;
@@ -53,7 +54,6 @@ const Home = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [selectedTrip]);
 
@@ -115,14 +115,33 @@ const Home = () => {
     sessionStorage.setItem("citycards", JSON.stringify(updatedTrips));
   };
 
-  const scrollToSelectedTrip = (trip, el) => {
-    if (trip === selectedTrip && el) {
-      el.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    }
+  const scrollToSelectedTrip = useCallback(
+    (trip, el) => {
+      if (trip === selectedTrip && el) {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    },
+    [selectedTrip]
+  );
+
+  const handleScrollLeft = () => {
+    const citiesContainer = document.querySelector(".home__content-cities");
+    citiesContainer.scrollBy({
+      left: -304,
+      behavior: "smooth",
+    });
+  };
+
+  const handleScrollRight = () => {
+    const citiesContainer = document.querySelector(".home__content-cities");
+    citiesContainer.scrollBy({
+      left: 304,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -183,10 +202,23 @@ const Home = () => {
                     ))
                   )}
                 </div>
-                <button onClick={() => setModalOpen(true)}>
-                  <h1>+</h1>
-                  <h1>Add trip</h1>
-                </button>
+                <div className="home__content-cities_buttons">
+                  <button
+                    onClick={() => setModalOpen(true)}
+                    className="home__content-cities_buttons-addButton"
+                  >
+                    <h1>+</h1>
+                    <h1>Add trip</h1>
+                  </button>
+                  <div className="home__content-cities_buttons-controls">
+                    <button onClick={handleScrollLeft}>
+                      <AiOutlineLeft size={27} />
+                    </button>
+                    <button onClick={handleScrollRight}>
+                      <AiOutlineRight size={27} />
+                    </button>
+                  </div>
+                </div>
               </div>
               <div className="home__week">
                 <h1>Week ({selectedTrip.city})</h1>

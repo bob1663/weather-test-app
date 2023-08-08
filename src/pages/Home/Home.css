@@ -85,7 +85,33 @@
   background: #616161;
 }
 
-.home__content-cities_container button {
+.home__content-cities_buttons {
+  display: flex;
+  width: 100%;
+  max-width: 280px;
+  min-width: 180px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.home__content-cities_buttons-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.home__content-cities_buttons-controls button {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f2f4f8;
+  height: 97px;
+  width: 100%;
+}
+
+.home__content-cities_buttons-addButton {
   all: unset;
   cursor: pointer;
   display: flex;
@@ -100,14 +126,16 @@
   width: 100%;
 }
 
-.home__content-cities_container button:hover {
+.home__content-cities_buttons-controls button:hover,
+.home__content-cities_buttons-addButton:hover {
   filter: brightness(95%);
 }
 
-.home__content-cities_container button h1:first-child {
+.home__content-cities_buttons-addButton h1:first-child {
   font-size: 48px;
 }
-.home__content-cities_container button h1 {
+
+.home__content-cities_buttons-addButton h1 {
   font-family: var(--font-mont);
   color: #000000;
   font-weight: 500;
@@ -175,7 +203,12 @@
     width: 100%;
   }
 
-  .home__content-cities_container button {
+  .home__content-cities_buttons {
+    max-width: none;
+    flex-direction: column-reverse;
+  }
+
+  .home__content-cities_buttons-addButton {
     max-width: none;
   }
 }
