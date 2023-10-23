@@ -1,4 +1,4 @@
-# Test Task Weather Forecast App for Reenbit
+# Test Task Weather Forecast App
 
 This is a repository for a Test Task Weather Forecast App for Reenbit: Vite, App Router, React, CSS, Clerk Auth, Visual Crossing API
 
